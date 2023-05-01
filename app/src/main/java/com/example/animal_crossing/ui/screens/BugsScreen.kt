@@ -11,25 +11,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.example.animal_crossing.data.api.model.Fish
-import com.example.animal_crossing.data.api.model.FishItem
-import com.example.animal_crossing.data.api.model.FishViewModel
+import com.example.animal_crossing.data.api.model.BugItem
+import com.example.animal_crossing.data.api.model.BugViewModel
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun FishScreen() {
-    val vm = FishViewModel()
+fun BugsScreen() {
+    val vm = BugViewModel()
 
     LaunchedEffect(key1 = Unit, block = {
-        vm.getAllFish()
+        vm.getAllBugs()
     })
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Row { Text(text = "All ACNH Fish") } }
+                title = { Row { Text(text = "All ACNH Bugs") } }
             )
         },
         content = {
@@ -37,7 +36,7 @@ fun FishScreen() {
                 LazyColumn(
                     modifier = Modifier.fillMaxHeight(),
                     content = {
-                        if(vm.fishList.isEmpty()) {
+                        if(vm.bugList.isEmpty()) {
                             item {
                                 CircularProgressIndicator(
                                     modifier = Modifier
@@ -47,8 +46,8 @@ fun FishScreen() {
                             }
                         }
 
-                        items(items = vm.fishList) { fish ->
-                            FishImageCard(fish = fish)
+                        items(items = vm.bugList) { bug ->
+                            BugImageCard(bug = bug)
                         }
                     }
                 )
@@ -60,14 +59,14 @@ fun FishScreen() {
 }
 
 @Composable
-fun FishImageCard(fish: FishItem) {
+fun BugImageCard(bug: BugItem) {
     Card(
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier.padding(16.dp)
     ) {
         Box {
             GlideImage(
-                imageModel = { fish.imageUrl },
+                imageModel = { bug.imageUrl },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp),
@@ -95,7 +94,7 @@ fun FishImageCard(fish: FishItem) {
                         .fillMaxWidth()
                         .padding(4.dp)
                 ) {
-                    Text("Name: ${fish.name}")
+                    Text("Name: ${bug.name}")
                 }
             }
         }
