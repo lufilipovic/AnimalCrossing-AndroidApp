@@ -7,9 +7,10 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 
 const val BASE_URL = "https://api.nookipedia.com/nh/"
+const val API_KEY = "8644fd1d-34b7-4c7e-9438-8e7d774e8d76"
 
 interface APIService {
-    @Headers("X-API-KEY: " + "8644fd1d-34b7-4c7e-9438-8e7d774e8d76")
+    @Headers("X-API-KEY: $API_KEY")
     @GET("fish")
     suspend fun getAllFish(): List<FishItem>
 
