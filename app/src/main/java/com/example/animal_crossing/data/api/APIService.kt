@@ -1,9 +1,6 @@
 package com.example.animal_crossing.data.api
 
-import com.example.animal_crossing.data.api.model.BugItem
-import com.example.animal_crossing.data.api.model.FishItem
-import com.example.animal_crossing.data.api.model.SeaCreatureItem
-import com.example.animal_crossing.data.api.model.VillagerItem
+import com.example.animal_crossing.data.api.model.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -28,6 +25,10 @@ interface APIService {
     @Headers("X-API-KEY: $API_KEY")
     @GET("villagers")
     suspend fun getAllVillagers(): List<VillagerItem>
+
+    @Headers("X-API-KEY: $API_KEY")
+    @GET("nh/fossils/individuals")
+    suspend fun getAllFossils(): List<FossilItem>
 
     companion object {
         var apiService: APIService? = null

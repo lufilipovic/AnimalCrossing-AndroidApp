@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.animal_crossing.ui.FishScreen
+import com.example.animal_crossing.ui.FossilScreen
 import com.example.animal_crossing.ui.theme.AnimalCrossingTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    FishScreen()
+                    FossilScreen()
                 }
             }
         }
