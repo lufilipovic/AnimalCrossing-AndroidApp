@@ -11,24 +11,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.example.animal_crossing.data.api.model.SeaCreatureItem
-import com.example.animal_crossing.data.api.model.SeaCreatureViewModel
+import com.example.animal_crossing.data.api.model.VillagerItem
+import com.example.animal_crossing.data.api.model.VillagerViewModel
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SeaCreatureScreen() {
-    val vm = SeaCreatureViewModel()
+fun VillagerScreen() {
+    val vm = VillagerViewModel()
 
     LaunchedEffect(key1 = Unit, block = {
-        vm.getAllSeaCreatures()
+        vm.getAllVillagers()
     })
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Row { Text(text = "All ACNH Sea Creatures") } }
+                title = { Row { Text(text = "All ACNH Villagers") } }
             )
         },
         content = {
@@ -36,7 +36,7 @@ fun SeaCreatureScreen() {
                 LazyColumn(
                     modifier = Modifier.fillMaxHeight(),
                     content = {
-                        if(vm.seaCreatureList.isEmpty()) {
+                        if(vm.villagerList.isEmpty()) {
                             item {
                                 CircularProgressIndicator(
                                     modifier = Modifier
@@ -46,8 +46,8 @@ fun SeaCreatureScreen() {
                             }
                         }
 
-                        items(items = vm.seaCreatureList) { seaCreature ->
-                            SeaCreatureCard(seaCreature = seaCreature)
+                        items(items = vm.villagerList) { villager ->
+                            VillagerCard(villager = villager)
                         }
                     }
                 )
@@ -59,14 +59,14 @@ fun SeaCreatureScreen() {
 }
 
 @Composable
-fun SeaCreatureCard(seaCreature: SeaCreatureItem) {
+fun VillagerCard(villager: VillagerItem) {
     Card(
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier.padding(16.dp)
     ) {
         Box {
             GlideImage(
-                imageModel = { seaCreature.imageUrl },
+                imageModel = { villager.imageUrl },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp),
@@ -94,7 +94,7 @@ fun SeaCreatureCard(seaCreature: SeaCreatureItem) {
                         .fillMaxWidth()
                         .padding(4.dp)
                 ) {
-                    Text("Name: ${seaCreature.name}")
+                    Text("Name: ${villager.name}")
                 }
             }
         }

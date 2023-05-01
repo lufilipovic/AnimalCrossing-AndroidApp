@@ -3,26 +3,31 @@ package com.example.animal_crossing.data.api
 import com.example.animal_crossing.data.api.model.BugItem
 import com.example.animal_crossing.data.api.model.FishItem
 import com.example.animal_crossing.data.api.model.SeaCreatureItem
+import com.example.animal_crossing.data.api.model.VillagerItem
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
 
-const val BASE_URL = "https://api.nookipedia.com/nh/"
+const val BASE_URL = "https://api.nookipedia.com/"
 const val API_KEY = "8644fd1d-34b7-4c7e-9438-8e7d774e8d76"
 
 interface APIService {
     @Headers("X-API-KEY: $API_KEY")
-    @GET("fish")
+    @GET("nh/fish")
     suspend fun getAllFish(): List<FishItem>
 
     @Headers("X-API-KEY: $API_KEY")
-    @GET("bugs")
+    @GET("nh/bugs")
     suspend fun getAllBugs(): List<BugItem>
 
     @Headers("X-API-KEY: $API_KEY")
-    @GET("sea")
+    @GET("nh/sea")
     suspend fun getAllSeaCreatures(): List<SeaCreatureItem>
+
+    @Headers("X-API-KEY: $API_KEY")
+    @GET("villagers")
+    suspend fun getAllVillagers(): List<VillagerItem>
 
     companion object {
         var apiService: APIService? = null

@@ -9,19 +9,19 @@ import androidx.lifecycle.viewModelScope
 import com.example.animal_crossing.data.api.APIService
 import kotlinx.coroutines.launch
 
-class SeaCreatureViewModel: ViewModel() {
-    private val _seaCreatureList = mutableStateListOf<SeaCreatureItem>()
+class VillagerViewModel: ViewModel() {
+    private val _villagerList = mutableStateListOf<VillagerItem>()
     var errorMassage: String by mutableStateOf("")
 
-    val seaCreatureList: List<SeaCreatureItem>
-        get() = _seaCreatureList
+    val villagerList: List<VillagerItem>
+        get() = _villagerList
 
-    fun getAllSeaCreatures() {
+    fun getAllVillagers() {
         viewModelScope.launch {
             val apiService = APIService.getInstance()
             try {
-                _seaCreatureList.clear()
-                _seaCreatureList.addAll(apiService.getAllSeaCreatures())
+                _villagerList.clear()
+                _villagerList.addAll(apiService.getAllVillagers())
             } catch (e: Exception) {
                 errorMassage = e.message.toString()
             }
