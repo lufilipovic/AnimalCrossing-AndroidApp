@@ -12,10 +12,6 @@ class AuthViewModel : ViewModel() {
     val userLoginStatus = _userLoginStatus.asStateFlow()
     private val firebaseAuth = FirebaseAuth.getInstance()
 
-    init {
-        performRegister("lucija@email.com", "test123456")
-    }
-
     fun performLogin(email: String, password: String) {
         FirebaseAuthentication.login(
             firebaseAuth,
@@ -28,6 +24,10 @@ class AuthViewModel : ViewModel() {
                 _userLoginStatus.value = UserLoginStatus.Failure(it)
             }
         )
+    }
+
+    fun performLogout(){
+        FirebaseAuthentication.logout(firebaseAuth)
     }
 
     fun performRegister(email: String, password: String) {

@@ -7,10 +7,16 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.animal_crossing.data.api.APIService
+import com.example.animal_crossing.data.api.model.FishItem
 import com.example.animal_crossing.data.api.model.FossilItem
 import kotlinx.coroutines.launch
 
 class FossilViewModel: ViewModel() {
+    lateinit var selectedFossil: FossilItem
+    val onFossilSelected: (fossil: FossilItem) -> Unit = {
+        selectedFossil = it
+    }
+
     private val _fossilList = mutableStateListOf<FossilItem>()
     var errorMassage: String by mutableStateOf("")
 

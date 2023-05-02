@@ -1,6 +1,7 @@
 package com.example.animal_crossing.ui.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -12,13 +13,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.VillagerViewModel
 import com.example.animal_crossing.ui.customComposables.CustomImageCard
+import com.example.animal_crossing.ui.navigation.Screen
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun VillagerScreen() {
-    val vm = VillagerViewModel()
+fun VillagerScreen(navigationController: NavHostController, vm: VillagerViewModel) {
+//    val vm = VillagerViewModel()
 
     LaunchedEffect(key1 = Unit, block = {
         vm.getAllVillagers()
@@ -51,6 +54,10 @@ fun VillagerScreen() {
                             Box(modifier = Modifier
                                 .fillMaxWidth(0.5f)
                                 .padding(8.dp)
+                                .clickable {
+                                    vm.onVillagerSelected(villager)
+                                    navigationController.navigate(Screen.DetailedVillagersScreen.route)
+                                }
                             ) {
                                 CustomImageCard(
                                     imageUrl = villager.imageUrl,
@@ -68,8 +75,8 @@ fun VillagerScreen() {
 }
 
 
-@Preview
-@Composable
-fun VillagerScreenPreview() {
-    VillagerScreen()
-}
+//@Preview
+//@Composable
+//fun VillagerScreenPreview() {
+//    VillagerScreen(navigationController)
+//}

@@ -11,6 +11,11 @@ import com.example.animal_crossing.data.api.model.BugItem
 import kotlinx.coroutines.launch
 
 class BugViewModel: ViewModel() {
+    lateinit var selectedBug: BugItem
+    val onBugSelected: (bug: BugItem) -> Unit = {
+        selectedBug = it
+    }
+
     private val _bugList = mutableStateListOf<BugItem>()
     var errorMassage: String by mutableStateOf("")
 

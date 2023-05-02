@@ -32,7 +32,6 @@ fun CustomImageCard(
         Box(modifier = Modifier.height(200.dp)) {
             GlideImage(
                 imageModel = { imageUrl },
-
                 imageOptions = ImageOptions(contentScale = ContentScale.FillBounds),
                 loading = {
                     Box(modifier = Modifier.matchParentSize()) {

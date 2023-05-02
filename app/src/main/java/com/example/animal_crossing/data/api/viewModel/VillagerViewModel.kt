@@ -7,10 +7,16 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.animal_crossing.data.api.APIService
+import com.example.animal_crossing.data.api.model.SeaCreatureItem
 import com.example.animal_crossing.data.api.model.VillagerItem
 import kotlinx.coroutines.launch
 
 class VillagerViewModel: ViewModel() {
+    lateinit var selectedVillager: VillagerItem
+    val onVillagerSelected: (villager: VillagerItem) -> Unit = {
+        selectedVillager = it
+    }
+
     private val _villagerList = mutableStateListOf<VillagerItem>()
     var errorMassage: String by mutableStateOf("")
 

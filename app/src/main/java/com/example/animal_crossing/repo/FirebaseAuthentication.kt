@@ -45,4 +45,8 @@ object FirebaseAuthentication {
                 }
             }
     }
+
+    fun logout(firebaseAuth: FirebaseAuth){
+       firebaseAuth.signOut()
+    }
 }

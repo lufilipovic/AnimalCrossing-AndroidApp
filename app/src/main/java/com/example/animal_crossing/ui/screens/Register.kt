@@ -23,11 +23,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.AuthViewModel
+import com.example.animal_crossing.ui.navigation.Screen
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
-fun RegisterUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewModel()) {
+fun RegisterUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewModel(), navigationController: NavHostController) {
 
     val localContext = LocalContext.current
 
@@ -100,11 +102,15 @@ fun RegisterUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = vie
                     }
                     else -> {
                         authViewModel.performRegister(email, password)
+                        navigationController.navigate(Screen.VillagersScreen.route)
+
                     }
                 }
 
             },
-            onSignInClick = {}
+            onSignInClick = {
+                navigationController.navigate(Screen.LoginScreen.route)
+            }
         )
 
     }

@@ -22,11 +22,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.AuthViewModel
 import com.example.animal_crossing.data.api.viewModel.UserLoginStatus
+import com.example.animal_crossing.ui.navigation.Screen
 
 @Composable
-fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewModel()) {
+fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewModel(), navigationController: NavHostController) {
 
     val localContext = LocalContext.current
 
@@ -122,11 +124,14 @@ fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewMo
                     }
                     else -> {
                         authViewModel.performLogin(email, password)
+                        navigationController.navigate(Screen.GameDetailScreen.route)
                     }
                 }
 
             },
-            onSignUpClick = {}
+            onSignUpClick = {
+                navigationController.navigate(Screen.RegisterScreen.route)
+            }
         )
 
     }
