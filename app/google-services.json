@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "799162395269",
+    "project_id": "animal-crossing-mobilede-60ba7",
+    "storage_bucket": "animal-crossing-mobilede-60ba7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799162395269:android:9d75be36d5269696c557ec",
+        "android_client_info": {
+          "package_name": "com.example.animal_crossing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799162395269-7jnm2tvrhbvqelcteltoe2hkcdhrcelo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5zU60riWlysuGks4Nh2V9arz-sc3t8us"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799162395269-7jnm2tvrhbvqelcteltoe2hkcdhrcelo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

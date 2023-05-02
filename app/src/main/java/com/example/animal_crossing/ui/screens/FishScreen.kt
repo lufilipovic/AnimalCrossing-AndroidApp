@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.example.animal_crossing.data.api.model.FishItem
-import com.example.animal_crossing.data.api.model.FishViewModel
+import com.example.animal_crossing.data.api.viewModel.FishViewModel
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 

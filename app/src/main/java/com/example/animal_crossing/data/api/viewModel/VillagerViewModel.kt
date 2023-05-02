@@ -1,4 +1,4 @@
-package com.example.animal_crossing.data.api.model
+package com.example.animal_crossing.data.api.viewModel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -7,21 +7,22 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.animal_crossing.data.api.APIService
+import com.example.animal_crossing.data.api.model.VillagerItem
 import kotlinx.coroutines.launch
 
-class FishViewModel: ViewModel() {
-    private val _fishList = mutableStateListOf<FishItem>()
+class VillagerViewModel: ViewModel() {
+    private val _villagerList = mutableStateListOf<VillagerItem>()
     var errorMassage: String by mutableStateOf("")
 
-    val fishList: List<FishItem>
-        get() = _fishList
+    val villagerList: List<VillagerItem>
+        get() = _villagerList
 
-    fun getAllFish() {
+    fun getAllVillagers() {
         viewModelScope.launch {
             val apiService = APIService.getInstance()
             try {
-                _fishList.clear()
-                _fishList.addAll(apiService.getAllFish())
+                _villagerList.clear()
+                _villagerList.addAll(apiService.getAllVillagers())
             } catch (e: Exception) {
                 errorMassage = e.message.toString()
             }

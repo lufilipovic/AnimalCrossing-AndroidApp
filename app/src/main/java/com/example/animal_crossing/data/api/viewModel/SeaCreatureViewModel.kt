@@ -1,4 +1,4 @@
-package com.example.animal_crossing.data.api.model
+package com.example.animal_crossing.data.api.viewModel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.animal_crossing.data.api.APIService
+import com.example.animal_crossing.data.api.model.SeaCreatureItem
 import kotlinx.coroutines.launch
 
 class SeaCreatureViewModel: ViewModel() {
