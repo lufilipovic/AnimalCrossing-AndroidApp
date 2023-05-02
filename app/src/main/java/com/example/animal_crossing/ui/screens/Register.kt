@@ -1,6 +1,7 @@
 package com.example.animal_crossing.ui.screens
 
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -23,10 +24,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.animal_crossing.data.api.viewModel.AuthViewModel
-import com.example.animal_crossing.data.api.viewModel.UserLoginStatus
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
-fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewModel()) {
+fun RegisterUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewModel()) {
 
     val localContext = LocalContext.current
 
@@ -35,29 +36,6 @@ fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewMo
     }
     var password by remember {
         mutableStateOf("")
-    }
-
-    val loginStatus by authViewModel.userLoginStatus.collectAsState()
-
-    var showFailedDialog by remember {
-        mutableStateOf(false)
-    }
-
-    LaunchedEffect(key1 = loginStatus){
-        when (loginStatus) {
-            is UserLoginStatus.Failure -> {
-                localContext.showToast("Unable to login")
-                showFailedDialog = true
-            }
-            UserLoginStatus.Successful -> {
-                localContext.showToast("Login successful")
-                onSuccessfulLogin()
-
-            }
-            null -> {
-
-            }
-        }
     }
 
     Column(
@@ -69,11 +47,11 @@ fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewMo
     ) {
 
         Text(
-            text = "Log In",
+            text = "Register",
             fontFamily = FontFamily.Cursive,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Medium,
-            //color = Color.,
+            //color = Color.Magenta,
             fontSize = 40.sp,
             modifier = Modifier
                 .fillMaxWidth()
@@ -108,8 +86,8 @@ fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewMo
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
         )
 
-        LoginFooter(
-            onSignInClick = {
+        RegisterFooter(
+            onSignUpClick = {
 
                 when {
                     email.isBlank() -> {
@@ -121,23 +99,19 @@ fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewMo
                         localContext.showToast("Enter password")
                     }
                     else -> {
-                        authViewModel.performLogin(email, password)
+                        authViewModel.performRegister(email, password)
                     }
                 }
 
             },
-            onSignUpClick = {}
+            onSignInClick = {}
         )
 
-    }
-
-    if (showFailedDialog) {
-        //toast or text on ui
     }
 }
 
 @Composable
-fun LoginFooter(
+fun RegisterFooter(
     onSignInClick: () -> Unit,
     onSignUpClick: () -> Unit
 ) {
@@ -145,12 +119,12 @@ fun LoginFooter(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
-            onClick = onSignInClick, modifier = Modifier.fillMaxWidth()
+            onClick = onSignUpClick, modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Sign In")
+            Text(text = "Register")
         }
-        TextButton(onClick = onSignUpClick) {
-            Text(text = "Don't have an account? Click here")
+        TextButton(onClick = onSignInClick) {
+            Text(text = "Already have an account? Login here")
         }
     }
 
@@ -159,4 +133,5 @@ fun LoginFooter(
 private fun Context.showToast(message: String){
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
+
 

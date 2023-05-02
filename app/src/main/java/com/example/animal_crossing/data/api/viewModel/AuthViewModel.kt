@@ -2,7 +2,6 @@ package com.example.animal_crossing.data.api.viewModel
 
 import androidx.lifecycle.ViewModel
 import com.example.animal_crossing.repo.FirebaseAuthentication
-import com.example.animal_crossing.ui.FossilScreen
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,10 +16,10 @@ class AuthViewModel : ViewModel() {
         performRegister("lucija@email.com", "test123456")
     }
 
-    fun performLogin(username: String, password: String) {
+    fun performLogin(email: String, password: String) {
         FirebaseAuthentication.login(
             firebaseAuth,
-            username,
+            email,
             password,
             onSuccess = {
                 _userLoginStatus.value = UserLoginStatus.Successful
@@ -31,10 +30,10 @@ class AuthViewModel : ViewModel() {
         )
     }
 
-    fun performRegister(username: String, password: String) {
+    fun performRegister(email: String, password: String) {
         FirebaseAuthentication.register(
             firebaseAuth,
-            username,
+            email,
             password,
             onSuccess = {
 

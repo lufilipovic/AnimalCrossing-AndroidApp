@@ -1,8 +1,11 @@
-package com.example.animal_crossing.ui
+package com.example.animal_crossing.ui.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -10,9 +13,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.animal_crossing.data.api.model.SeaCreatureItem
 import com.example.animal_crossing.data.api.viewModel.SeaCreatureViewModel
+import com.example.animal_crossing.ui.customComposables.CustomImageCard
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -33,8 +38,10 @@ fun SeaCreatureScreen() {
         },
         content = {
             if(vm.errorMassage.isEmpty()) {
-                LazyColumn(
-                    modifier = Modifier.fillMaxHeight(),
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2), // Display 2 cards per row
+                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
+                    modifier = Modifier.padding(5.dp),
                     content = {
                         if(vm.seaCreatureList.isEmpty()) {
                             item {
@@ -46,8 +53,16 @@ fun SeaCreatureScreen() {
                             }
                         }
 
-                        items(items = vm.seaCreatureList) { seaCreature ->
-                            SeaCreatureCard(seaCreature = seaCreature)
+                        items(items = vm.seaCreatureList) { creature ->
+                            Box(modifier = Modifier
+                                .fillMaxWidth(0.5f)
+                                .padding(8.dp)
+                            ) {
+                                CustomImageCard(
+                                    imageUrl = creature.imageUrl,
+                                    cardTitle = creature.name
+                                )
+                            }
                         }
                     }
                 )
@@ -58,45 +73,8 @@ fun SeaCreatureScreen() {
     )
 }
 
+@Preview
 @Composable
-fun SeaCreatureCard(seaCreature: SeaCreatureItem) {
-    Card(
-        shape = MaterialTheme.shapes.medium,
-        modifier = Modifier.padding(16.dp)
-    ) {
-        Box {
-            GlideImage(
-                imageModel = { seaCreature.imageUrl },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
-                imageOptions = ImageOptions(contentScale = ContentScale.FillBounds),
-                loading = {
-                    Box(modifier = Modifier.matchParentSize()) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.align(Alignment.Center)
-                        )
-                    }
-                },
-                failure = {
-                    Text("Image request failed")
-                    //println(photograph.url)
-                }
-            )
-
-            Surface(
-                color = MaterialTheme.colors.onSurface.copy(alpha = .3f),
-                modifier = Modifier.align(Alignment.BottomCenter),
-                contentColor = MaterialTheme.colors.surface
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(4.dp)
-                ) {
-                    Text("Name: ${seaCreature.name}")
-                }
-            }
-        }
-    }
+fun CreaturesScreenPreview() {
+    SeaCreatureScreen()
 }
