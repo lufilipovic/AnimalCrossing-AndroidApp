@@ -124,7 +124,7 @@ fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewMo
                     }
                     else -> {
                         authViewModel.performLogin(email, password)
-                        navigationController.navigate(Screen.GameDetailScreen.route)
+                        navigationController.navigate(Screen.VillagersScreen.route)
                     }
                 }
 
