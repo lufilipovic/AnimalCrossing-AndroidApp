@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.SeaCreatureViewModel
 import com.example.animal_crossing.ui.customComposables.CustomImageCard
-import com.example.animal_crossing.ui.navigation.Screen
+import com.example.animal_crossing.ui.navigation.NavDrawerItem
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -56,7 +56,7 @@ fun SeaCreatureScreen(navigationController: NavHostController, vm: SeaCreatureVi
                                 .padding(8.dp)
                                 .clickable {
                                     vm.onSeaCreatureSelected(creature)
-                                    navigationController.navigate(Screen.DetailedSeaCreaturesScreen.route)
+                                    navigationController.navigate(NavDrawerItem.DetailedSeaCreaturesScreen.route)
                                 }
                             ) {
                                 CustomImageCard(

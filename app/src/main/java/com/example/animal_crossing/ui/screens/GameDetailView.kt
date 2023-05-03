@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.AuthViewModel
-import com.example.animal_crossing.ui.navigation.Screen
+import com.example.animal_crossing.ui.navigation.NavDrawerItem
 
 @Composable
 fun GameDetailView(authViewModel: AuthViewModel = viewModel(), navigationController: NavHostController){
@@ -16,7 +16,7 @@ fun GameDetailView(authViewModel: AuthViewModel = viewModel(), navigationControl
     Button(
         onClick = {
             authViewModel.performLogout()
-            navigationController.navigate(Screen.LoginScreen.route)
+            navigationController.navigate(NavDrawerItem.LoginScreen.route)
 
         },
         modifier = Modifier.fillMaxWidth()

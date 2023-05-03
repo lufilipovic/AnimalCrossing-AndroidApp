@@ -25,7 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.AuthViewModel
 import com.example.animal_crossing.data.api.viewModel.UserLoginStatus
-import com.example.animal_crossing.ui.navigation.Screen
+import com.example.animal_crossing.ui.navigation.NavDrawerItem
 
 @Composable
 fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewModel(), navigationController: NavHostController) {
@@ -124,13 +124,13 @@ fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewMo
                     }
                     else -> {
                         authViewModel.performLogin(email, password)
-                        navigationController.navigate(Screen.VillagersScreen.route)
+                        navigationController.navigate(NavDrawerItem.VillagersScreen.route)
                     }
                 }
 
             },
             onSignUpClick = {
-                navigationController.navigate(Screen.RegisterScreen.route)
+                navigationController.navigate(NavDrawerItem.RegisterScreen.route)
             }
         )
 

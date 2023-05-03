@@ -1,6 +1,8 @@
 package com.example.animal_crossing.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -8,73 +10,71 @@ import com.example.animal_crossing.data.api.viewModel.*
 import com.example.animal_crossing.ui.screens.*
 
 @Composable
-fun Navigation(){
-    val navigationController = rememberNavController()
+fun Navigation(navController: NavHostController) {
+    //val navController = rememberNavController()
     val bugViewModel = BugViewModel()
     val fishViewModel = FishViewModel()
     val fossilsViewModel = FossilViewModel()
     val seaCreaturesViewModel = SeaCreatureViewModel()
     val villagersViewModel = VillagerViewModel()
 
-    NavHost(navController = navigationController, startDestination = Screen.LoginScreen.route){
-        composable(Screen.BugsScreen.route){
-            BugsScreen(navigationController, bugViewModel)
+    NavHost(navController = navController, startDestination = NavDrawerItem.LoginScreen.route) {
+        composable(NavDrawerItem.BugsScreen.route){
+            BugsScreen(navController, bugViewModel)
         }
-        composable(Screen.DetailedBugScreen.route){
+        composable(NavDrawerItem.DetailedBugScreen.route){
             DetailedBugScreen(vm = bugViewModel)
         }
-        composable(Screen.FishScreen.route){
-            FishScreen(navigationController, fishViewModel)
+        composable(NavDrawerItem.FishScreen.route){
+            FishScreen(navController, fishViewModel)
         }
-        composable(Screen.DetailedFishScreen.route){
+        composable(NavDrawerItem.DetailedFishScreen.route){
             DetailedFishScreen(vm = fishViewModel)
         }
-        composable(Screen.FossilsScreen.route){
-            FossilScreen(navigationController, fossilsViewModel)
+        composable(NavDrawerItem.FossilsScreen.route){
+            FossilScreen(navController, fossilsViewModel)
         }
-        composable(Screen.DetailedFossilsScreen.route){
+        composable(NavDrawerItem.DetailedFossilsScreen.route){
             DetailedFossilsScreen(vm = fossilsViewModel)
         }
-        composable(Screen.SeaCreaturesScreen.route){
-            SeaCreatureScreen(navigationController, seaCreaturesViewModel)
+        composable(NavDrawerItem.SeaCreaturesScreen.route){
+            SeaCreatureScreen(navController, seaCreaturesViewModel)
         }
-        composable(Screen.DetailedSeaCreaturesScreen.route){
+        composable(NavDrawerItem.DetailedSeaCreaturesScreen.route){
             DetailedSeaCreaturesScreen(vm = seaCreaturesViewModel)
         }
-        composable(Screen.VillagersScreen.route){
-            VillagerScreen(navigationController, villagersViewModel)
+        composable(NavDrawerItem.VillagersScreen.route){
+            VillagerScreen(navController, villagersViewModel)
         }
-        composable(Screen.DetailedVillagersScreen.route){
+        composable(NavDrawerItem.DetailedVillagersScreen.route){
             DetailedVillagersScreen(vm = villagersViewModel)
         }
 
-        composable(Screen.GameDetailScreen.route){
-            GameDetailView(navigationController = navigationController)
+        composable(NavDrawerItem.GameDetailScreen.route){
+            GameDetailView(navigationController = navController)
         }
 
-        composable(Screen.LoginScreen.route){
-            LoginUI(onSuccessfulLogin = { /*TODO*/ }, navigationController = navigationController)
+        composable(NavDrawerItem.LoginScreen.route){
+            LoginUI(onSuccessfulLogin = { /*TODO*/ }, navigationController = navController)
         }
 
-        composable(Screen.RegisterScreen.route){
-            RegisterUI(onSuccessfulLogin = { /*TODO*/ }, navigationController = navigationController)
+        composable(NavDrawerItem.RegisterScreen.route){
+            RegisterUI(onSuccessfulLogin = { /*TODO*/ }, navigationController = navController)
         }
     }
-}
-
-sealed class Screen(val route: String){
-    object BugsScreen: Screen("bugs_screen")
-    object DetailedBugScreen: Screen("detailed_bug_screen")
-    object FishScreen: Screen("fish_screen")
-    object DetailedFishScreen: Screen("detailed_fish_screen")
-    object FossilsScreen: Screen("fossils_screen")
-    object DetailedFossilsScreen: Screen("detailed_fossils_screen")
-    object SeaCreaturesScreen: Screen("sea_creatures_screen")
-    object DetailedSeaCreaturesScreen: Screen("detailed_sea_creatures_screen")
-    object VillagersScreen: Screen("villagers_screen")
-    object DetailedVillagersScreen: Screen("detailed_villagers_screen")
-    object LoginScreen: Screen("login_screen")
-    object RegisterScreen: Screen("register_screen")
-    object GameDetailScreen: Screen("game_detail_screen")
-
+} // Navigation
+sealed class NavDrawerItem(val route: String){
+    object BugsScreen: NavDrawerItem("bugs_screen")
+    object DetailedBugScreen: NavDrawerItem("detailed_bug_screen")
+    object FishScreen: NavDrawerItem("fish_screen")
+    object DetailedFishScreen: NavDrawerItem("detailed_fish_screen")
+    object FossilsScreen: NavDrawerItem("fossils_screen")
+    object DetailedFossilsScreen: NavDrawerItem("detailed_fossils_screen")
+    object SeaCreaturesScreen: NavDrawerItem("sea_creatures_screen")
+    object DetailedSeaCreaturesScreen: NavDrawerItem("detailed_sea_creatures_screen")
+    object VillagersScreen: NavDrawerItem("villagers_screen")
+    object DetailedVillagersScreen: NavDrawerItem("detailed_villagers_screen")
+    object LoginScreen: NavDrawerItem("login_screen")
+    object RegisterScreen: NavDrawerItem("register_screen")
+    object GameDetailScreen: NavDrawerItem("game_detail_screen")
 }

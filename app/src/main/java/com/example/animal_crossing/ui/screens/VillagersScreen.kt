@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.VillagerViewModel
 import com.example.animal_crossing.ui.customComposables.CustomImageCard
-import com.example.animal_crossing.ui.navigation.Screen
+import com.example.animal_crossing.ui.navigation.NavDrawerItem
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -56,7 +56,7 @@ fun VillagerScreen(navigationController: NavHostController, vm: VillagerViewMode
                                 .padding(8.dp)
                                 .clickable {
                                     vm.onVillagerSelected(villager)
-                                    navigationController.navigate(Screen.DetailedVillagersScreen.route)
+                                    navigationController.navigate(NavDrawerItem.DetailedVillagersScreen.route)
                                 }
                             ) {
                                 CustomImageCard(

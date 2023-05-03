@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.AuthViewModel
-import com.example.animal_crossing.ui.navigation.Screen
+import com.example.animal_crossing.ui.navigation.NavDrawerItem
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
@@ -102,14 +102,14 @@ fun RegisterUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = vie
                     }
                     else -> {
                         authViewModel.performRegister(email, password)
-                        navigationController.navigate(Screen.VillagersScreen.route)
+                        navigationController.navigate(NavDrawerItem.VillagersScreen.route)
 
                     }
                 }
 
             },
             onSignInClick = {
-                navigationController.navigate(Screen.LoginScreen.route)
+                navigationController.navigate(NavDrawerItem.LoginScreen.route)
             }
         )
 
