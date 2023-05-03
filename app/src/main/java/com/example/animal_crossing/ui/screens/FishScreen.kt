@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.FishViewModel
 import com.example.animal_crossing.ui.customComposables.CustomImageCard
-import com.example.animal_crossing.ui.navigation.Screen
+import com.example.animal_crossing.ui.navigation.NavDrawerItem
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -56,7 +56,7 @@ fun FishScreen(navigationController: NavHostController, vm: FishViewModel) {
                                 .padding(8.dp)
                                 .clickable {
                                     vm.onFishSelected(fish)
-                                    navigationController.navigate(Screen.DetailedFishScreen.route)
+                                    navigationController.navigate(NavDrawerItem.DetailedFishScreen.route)
                                 }
                             ) {
                                 CustomImageCard(

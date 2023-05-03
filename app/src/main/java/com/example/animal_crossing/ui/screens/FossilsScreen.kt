@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.FossilViewModel
 import com.example.animal_crossing.ui.customComposables.CustomImageCard
-import com.example.animal_crossing.ui.navigation.Screen
+import com.example.animal_crossing.ui.navigation.NavDrawerItem
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -56,7 +56,7 @@ fun FossilScreen(navigationController: NavHostController, vm: FossilViewModel) {
                                 .padding(8.dp)
                                 .clickable {
                                     vm.onFossilSelected(fossil)
-                                    navigationController.navigate(Screen.DetailedFossilsScreen.route)
+                                    navigationController.navigate(NavDrawerItem.DetailedFossilsScreen.route)
                                 }
                             ) {
                                 CustomImageCard(
