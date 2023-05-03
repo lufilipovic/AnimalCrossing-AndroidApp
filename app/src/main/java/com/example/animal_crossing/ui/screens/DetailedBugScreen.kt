@@ -26,7 +26,7 @@ fun DetailedBugScreen(vm: BugViewModel) {
                         .fillMaxSize()
                         .verticalScroll(scrollState)
                 ) {
-                    ProfileHeader(image = vm.selectedBug.imageUrl, containerHeight = this@BoxWithConstraints.maxHeight)
+                    ProfileHeader(image = bug.imageUrl, containerHeight = this@BoxWithConstraints.maxHeight)
                     ProfileContent(vm = vm, containerHeight = this@BoxWithConstraints.maxHeight)
                 }
             }
@@ -41,9 +41,10 @@ private fun ProfileContent(
 ) {
     val bug = vm.selectedBug
     Column {
-        Title(vm.selectedBug.name)
+        Title(bug.name)
         ProfileProperty(label = "Location", value = bug.location)
-        ProfileProperty(label = "Months", value = bug.south.months)
+        ProfileProperty(label = "Months (Northern Hemisphere)", value = bug.north.months)
+        ProfileProperty(label = "Months (Southern Hemisphere)", value = bug.south.months)
         ProfileProperty(label = "Url", value = bug.url)
 
         bug.catchphrases.forEach { catchphrase ->
