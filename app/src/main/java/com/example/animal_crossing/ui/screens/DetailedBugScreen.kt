@@ -5,6 +5,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -40,7 +41,7 @@ private fun ProfileContent(
     containerHeight: Dp
 ) {
     val bug = vm.selectedBug
-    Column {
+    Column{
         Title(bug.name)
         ProfileProperty(label = "Location", value = bug.location)
         ProfileProperty(label = "Months (Northern Hemisphere)", value = bug.north.months)

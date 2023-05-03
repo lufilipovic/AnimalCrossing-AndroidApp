@@ -6,6 +6,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -41,7 +42,10 @@ private fun ProfileContent(
     containerHeight: Dp
 ) {
     val villagers = vm.selectedVillager
-    Column {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Title(villagers.name)
         ProfileProperty(label = "url", value = villagers.url)
         ProfileProperty(label = "Species", value = villagers.species)

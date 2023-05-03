@@ -101,7 +101,7 @@ fun RegisterUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = vie
                         localContext.showToast("Enter password")
                     }
                     else -> {
-                        authViewModel.performRegister(email, password)
+                        authViewModel.performRegister(email, password, navigationController)
                         navigationController.navigate(NavDrawerItem.VillagersScreen.route)
 
                     }

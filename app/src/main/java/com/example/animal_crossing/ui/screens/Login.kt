@@ -54,10 +54,10 @@ fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewMo
             UserLoginStatus.Successful -> {
                 localContext.showToast("Login successful")
                 onSuccessfulLogin()
-
             }
             null -> {
-
+                localContext.showToast("Unable to login")
+                showFailedDialog = true
             }
         }
     }
@@ -123,8 +123,8 @@ fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewMo
                         localContext.showToast("Enter password")
                     }
                     else -> {
-                        authViewModel.performLogin(email, password)
-                        navigationController.navigate(NavDrawerItem.VillagersScreen.route)
+                        authViewModel.performLogin(email, password, navigationController)
+
                     }
                 }
 
