@@ -16,7 +16,7 @@ fun Navigation(){
     val seaCreaturesViewModel = SeaCreatureViewModel()
     val villagersViewModel = VillagerViewModel()
 
-    NavHost(navController = navigationController, startDestination = Screen.LoginScreen.route){
+    NavHost(navController = navigationController, startDestination = Screen.BugsScreen.route){
         composable(Screen.BugsScreen.route){
             BugsScreen(navigationController, bugViewModel)
         }
