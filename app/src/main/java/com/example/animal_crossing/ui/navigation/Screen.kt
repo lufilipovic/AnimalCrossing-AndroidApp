@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.animal_crossing.R
 import com.example.animal_crossing.data.api.viewModel.*
 import com.example.animal_crossing.ui.screens.*
 
@@ -63,18 +64,18 @@ fun Navigation(navController: NavHostController) {
         }
     }
 } // Navigation
-sealed class NavDrawerItem(val route: String){
-    object BugsScreen: NavDrawerItem("bugs_screen")
-    object DetailedBugScreen: NavDrawerItem("detailed_bug_screen")
-    object FishScreen: NavDrawerItem("fish_screen")
-    object DetailedFishScreen: NavDrawerItem("detailed_fish_screen")
-    object FossilsScreen: NavDrawerItem("fossils_screen")
-    object DetailedFossilsScreen: NavDrawerItem("detailed_fossils_screen")
-    object SeaCreaturesScreen: NavDrawerItem("sea_creatures_screen")
-    object DetailedSeaCreaturesScreen: NavDrawerItem("detailed_sea_creatures_screen")
-    object VillagersScreen: NavDrawerItem("villagers_screen")
-    object DetailedVillagersScreen: NavDrawerItem("detailed_villagers_screen")
-    object LoginScreen: NavDrawerItem("login_screen")
-    object RegisterScreen: NavDrawerItem("register_screen")
-    object GameDetailScreen: NavDrawerItem("game_detail_screen")
+sealed class NavDrawerItem(val route: String, var icon: Int, var title: String){
+    object BugsScreen: NavDrawerItem("bugs_screen", icon = R.drawable.bug, title = "Bugs")
+    object DetailedBugScreen: NavDrawerItem("detailed_bug_screen", icon = R.drawable.bug, title = "Bugs")
+    object FishScreen: NavDrawerItem("fish_screen", icon = R.drawable.fish, title = "Fish")
+    object DetailedFishScreen: NavDrawerItem("detailed_fish_screen", icon = R.drawable.fish, title = "Fish")
+    object FossilsScreen: NavDrawerItem("fossils_screen", icon = R.drawable.fossil, title = "Fossil")
+    object DetailedFossilsScreen: NavDrawerItem("detailed_fossils_screen", icon = R.drawable.fossil, title = "Fossil")
+    object SeaCreaturesScreen: NavDrawerItem("sea_creatures_screen", icon = R.drawable.turtle, title = "Sea")
+    object DetailedSeaCreaturesScreen: NavDrawerItem("detailed_sea_creatures_screen", icon = R.drawable.turtle, title = "Sea")
+    object VillagersScreen: NavDrawerItem("villagers_screen", icon = R.drawable.villager, title = "Villager")
+    object DetailedVillagersScreen: NavDrawerItem("detailed_villagers_screen", icon = R.drawable.villager, title = "Villagers")
+    object LoginScreen: NavDrawerItem("login_screen", icon = R.drawable.ic_home, title = "Login")
+    object RegisterScreen: NavDrawerItem("register_screen", icon = R.drawable.ic_home, title = "Register")
+    object GameDetailScreen: NavDrawerItem("game_detail_screen", icon = R.drawable.info, title = "Info")
 }
