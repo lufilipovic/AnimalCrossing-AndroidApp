@@ -1,5 +1,7 @@
 package com.example.animal_crossing.ui.navigation
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -11,7 +13,7 @@ import com.example.animal_crossing.data.api.viewModel.*
 import com.example.animal_crossing.ui.screens.*
 
 @Composable
-fun Navigation(navController: NavHostController) {
+fun Navigation(navController: NavHostController, context: Context) {
     //val navController = rememberNavController()
     val bugViewModel = BugViewModel()
     val fishViewModel = FishViewModel()
@@ -19,12 +21,14 @@ fun Navigation(navController: NavHostController) {
     val seaCreaturesViewModel = SeaCreatureViewModel()
     val villagersViewModel = VillagerViewModel()
 
+    val sharedPreferences = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+
     NavHost(navController = navController, startDestination = NavDrawerItem.LoginScreen.route) {
         composable(NavDrawerItem.BugsScreen.route){
             BugsScreen(navController, bugViewModel)
         }
         composable(NavDrawerItem.DetailedBugScreen.route){
-            DetailedBugScreen(vm = bugViewModel)
+            DetailedBugScreen(vm = bugViewModel, sharedPreferences = sharedPreferences)
         }
         composable(NavDrawerItem.FishScreen.route){
             FishScreen(navController, fishViewModel)
