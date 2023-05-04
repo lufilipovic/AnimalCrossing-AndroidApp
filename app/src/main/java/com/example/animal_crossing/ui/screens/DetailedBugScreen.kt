@@ -29,7 +29,6 @@ fun DetailedBugScreen(vm: BugViewModel, sharedPreferences: SharedPreferences) {
 
     val scrollState = rememberScrollState()
     val bug = vm.selectedBug
-    //val likedItems = sharedPreferences.getStringSet("likedItems", emptySet()) ?: emptySet()
 
     Column(modifier = Modifier.fillMaxSize()) {
         BoxWithConstraints {

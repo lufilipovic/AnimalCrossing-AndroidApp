@@ -1,14 +1,23 @@
 package com.example.animal_crossing.ui.screens
 
+import android.content.SharedPreferences
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.core.content.edit
 import com.example.animal_crossing.data.api.viewModel.BugViewModel
 import com.example.animal_crossing.data.api.viewModel.FishViewModel
 import com.example.animal_crossing.data.api.viewModel.FossilViewModel
@@ -17,7 +26,7 @@ import com.example.animal_crossing.ui.customComposables.ProfileProperty
 import com.example.animal_crossing.ui.customComposables.Title
 
 @Composable
-fun DetailedFossilsScreen(vm: FossilViewModel) {
+fun DetailedFossilsScreen(vm: FossilViewModel, sharedPreferences: SharedPreferences) {
     val scrollState = rememberScrollState()
     val fossil = vm.selectedFossil
     Column(modifier = Modifier.fillMaxSize()) {
@@ -29,7 +38,7 @@ fun DetailedFossilsScreen(vm: FossilViewModel) {
                         .verticalScroll(scrollState)
                 ) {
                     ProfileHeader(image = fossil.imageUrl, containerHeight = this@BoxWithConstraints.maxHeight)
-                    ProfileContent(vm = vm, containerHeight = this@BoxWithConstraints.maxHeight)
+                    ProfileContent(vm = vm, containerHeight = this@BoxWithConstraints.maxHeight, sharedPreferences = sharedPreferences)
                 }
             }
         }
@@ -39,11 +48,49 @@ fun DetailedFossilsScreen(vm: FossilViewModel) {
 @Composable
 private fun ProfileContent(
     vm: FossilViewModel,
-    containerHeight: Dp
+    containerHeight: Dp,
+    sharedPreferences: SharedPreferences
 ) {
+    var likedItems by rememberSaveable { mutableStateOf(emptyList<String>()) }
     val fossils = vm.selectedFossil
+
+    // Load liked items from SharedPreferences when the composable is recomposed
+    LaunchedEffect(sharedPreferences) {
+        val likedItemsSet = sharedPreferences.getStringSet("liked_items", emptySet())
+        if (likedItemsSet != null) {
+            likedItems = likedItemsSet.toList()
+        }
+    }
+
+    // Save liked items to SharedPreferences whenever the list changes
+    LaunchedEffect(likedItems, sharedPreferences) {
+        sharedPreferences.edit {
+            putStringSet("liked_items", likedItems.toSet())
+        }
+    }
+
     Column {
-        Title(fossils.name)
+        Row {
+            Title(fossils.name)
+            IconButton(
+                onClick = {
+                    likedItems = if (likedItems.contains(fossils.name)) {
+                        likedItems - fossils.name
+                    } else {
+                        likedItems + fossils.name
+                    }
+                    Log.d("ProfileContent", "Liked items: $likedItems")
+                },
+                modifier = Modifier.size(48.dp)
+            ) {
+                Icon(
+                    imageVector = if (likedItems.contains(fossils.name)) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                    contentDescription = if (likedItems.contains(fossils.name)) "Liked" else "Not liked"
+                )
+            }
+
+        }
+
         ProfileProperty(label = "Url", value = fossils.url)
         ProfileProperty(label = "Fossil Group", value = fossils.fossilGroup)
         ProfileProperty(label = "Interactable", value = fossils.interactable.toString())

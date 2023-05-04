@@ -34,25 +34,25 @@ fun Navigation(navController: NavHostController, context: Context) {
             FishScreen(navController, fishViewModel)
         }
         composable(NavDrawerItem.DetailedFishScreen.route){
-            DetailedFishScreen(vm = fishViewModel)
+            DetailedFishScreen(vm = fishViewModel, sharedPreferences = sharedPreferences)
         }
         composable(NavDrawerItem.FossilsScreen.route){
             FossilScreen(navController, fossilsViewModel)
         }
         composable(NavDrawerItem.DetailedFossilsScreen.route){
-            DetailedFossilsScreen(vm = fossilsViewModel)
+            DetailedFossilsScreen(vm = fossilsViewModel, sharedPreferences = sharedPreferences)
         }
         composable(NavDrawerItem.SeaCreaturesScreen.route){
             SeaCreatureScreen(navController, seaCreaturesViewModel)
         }
         composable(NavDrawerItem.DetailedSeaCreaturesScreen.route){
-            DetailedSeaCreaturesScreen(vm = seaCreaturesViewModel)
+            DetailedSeaCreaturesScreen(vm = seaCreaturesViewModel, sharedPreferences = sharedPreferences)
         }
         composable(NavDrawerItem.VillagersScreen.route){
             VillagerScreen(navController, villagersViewModel)
         }
         composable(NavDrawerItem.DetailedVillagersScreen.route){
-            DetailedVillagersScreen(vm = villagersViewModel)
+            DetailedVillagersScreen(vm = villagersViewModel, sharedPreferences = sharedPreferences)
         }
 
         composable(NavDrawerItem.GameDetailScreen.route){
