@@ -1,6 +1,7 @@
 package com.example.animal_crossing.ui.customComposables
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -16,18 +17,18 @@ import com.example.animal_crossing.ui.navigation.Navigation
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreen(){
-    val scaffoldState =
-        rememberScaffoldState(rememberDrawerState(initialValue = DrawerValue.Closed))
+fun MainScreen(context: Context) {
+    val scaffoldState = rememberScaffoldState(rememberDrawerState(initialValue = DrawerValue.Closed))
     val navController = rememberNavController()
 
     Scaffold(
         scaffoldState = scaffoldState,
         bottomBar = { BottomBar(navController = navController) }
     ) {
-        Navigation(navController = navController)
+        Navigation(navController = navController, context = context)
     }
 }
+
 
 @Composable
 fun BottomBar(modifier: Modifier = Modifier, navController: NavController) {
