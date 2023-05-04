@@ -45,6 +45,7 @@ fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewMo
         mutableStateOf(false)
     }
 
+
     LaunchedEffect(key1 = loginStatus){
         when (loginStatus) {
             is UserLoginStatus.Failure -> {
@@ -134,6 +135,13 @@ fun LoginUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewMo
             }
         )
 
+//        Button(
+//            onClick = { isLight = !isLight }, // Toggle the theme mode when the button is clicked
+//            modifier = Modifier.padding(8.dp)
+//        ) {
+//            Text(if (isLight) "Dark Mode" else "Light Mode")
+//        }
+
     }
 
     if (showFailedDialog) {
@@ -160,7 +168,6 @@ fun LoginFooter(
     }
 
 }
-
 private fun Context.showToast(message: String){
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }

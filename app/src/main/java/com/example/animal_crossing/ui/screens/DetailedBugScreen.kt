@@ -1,10 +1,17 @@
 package com.example.animal_crossing.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
@@ -16,6 +23,7 @@ import com.example.animal_crossing.ui.customComposables.Title
 
 @Composable
 fun DetailedBugScreen(vm: BugViewModel) {
+
     val scrollState = rememberScrollState()
     val bug = vm.selectedBug
 
@@ -40,9 +48,27 @@ private fun ProfileContent(
     vm: BugViewModel,
     containerHeight: Dp
 ) {
+    var likedItems by rememberSaveable { mutableStateOf(emptyList<String>()) }
     val bug = vm.selectedBug
     Column{
-        Title(bug.name)
+        Row {
+            Title(bug.name)
+            IconButton(
+                onClick = {
+                    if (!likedItems.contains(bug.name)) {
+                        likedItems = likedItems + bug.name
+                        Log.d("ProfileContent", "Liked items: $likedItems")
+                    }
+                },
+                modifier = Modifier.size(48.dp)
+            ) {
+                Icon(
+                    imageVector = if (likedItems.contains(bug.name)) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                    contentDescription = if (likedItems.contains(bug.name)) "Liked" else "Not liked"
+                )
+            }
+        }
+
         ProfileProperty(label = "Location", value = bug.location)
         ProfileProperty(label = "Months (Northern Hemisphere)", value = bug.north.months)
         ProfileProperty(label = "Months (Southern Hemisphere)", value = bug.south.months)

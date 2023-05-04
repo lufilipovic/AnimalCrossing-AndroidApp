@@ -7,24 +7,18 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = ThemeColors.Night.primary,
+    onPrimary = ThemeColors.Night.text,
+    surface = ThemeColors.Night.surface,
+    background = ThemeColors.Night.background,
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = ThemeColors.Day.primary,
+    onPrimary = ThemeColors.Day.text,
+    surface = ThemeColors.Day.surface,
+    background = ThemeColors.Day.background,
 
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
 )
 
 @Composable
@@ -39,9 +33,10 @@ fun AnimalCrossingTheme(
     }
 
     MaterialTheme(
-        colors = colors,
+        colors = if(darkTheme) DarkColorPalette else LightColorPalette,
         typography = Typography,
         shapes = Shapes,
         content = content
     )
+
 }
