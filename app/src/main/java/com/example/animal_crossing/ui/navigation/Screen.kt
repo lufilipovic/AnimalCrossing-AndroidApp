@@ -66,6 +66,10 @@ fun Navigation(navController: NavHostController, context: Context) {
         composable(NavDrawerItem.RegisterScreen.route){
             RegisterUI(onSuccessfulLogin = { /*TODO*/ }, navigationController = navController)
         }
+
+        composable(NavDrawerItem.FavoritesScreen.route){
+            Favorites(sharedPreferences = sharedPreferences)
+        }
     }
 } // Navigation
 sealed class NavDrawerItem(val route: String, var icon: Int, var title: String){
@@ -82,4 +86,5 @@ sealed class NavDrawerItem(val route: String, var icon: Int, var title: String){
     object LoginScreen: NavDrawerItem("login_screen", icon = R.drawable.ic_home, title = "Login")
     object RegisterScreen: NavDrawerItem("register_screen", icon = R.drawable.ic_home, title = "Register")
     object GameDetailScreen: NavDrawerItem("game_detail_screen", icon = R.drawable.info, title = "Info")
+    object FavoritesScreen: NavDrawerItem("favorites_screen", icon = R.drawable.info, title = "Favorites")
 }

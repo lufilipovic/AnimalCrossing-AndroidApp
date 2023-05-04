@@ -38,7 +38,8 @@ fun BottomBar(modifier: Modifier = Modifier, navController: NavController) {
         NavDrawerItem.FossilsScreen,
         NavDrawerItem.SeaCreaturesScreen,
         NavDrawerItem.VillagersScreen,
-        NavDrawerItem.GameDetailScreen
+        NavDrawerItem.GameDetailScreen,
+        NavDrawerItem.FavoritesScreen
     )
 
     BottomNavigation(
