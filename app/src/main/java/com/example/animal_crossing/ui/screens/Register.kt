@@ -22,11 +22,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.AuthViewModel
+import com.example.animal_crossing.data.api.viewModel.UserRegisterStatus
 import com.example.animal_crossing.ui.navigation.NavDrawerItem
 
 @Composable
 fun RegisterUI(
-    onSuccessfulLogin: () -> Unit,
+    onSuccessfulRegister: () -> Unit,
     authViewModel: AuthViewModel = viewModel(),
     navigationController: NavHostController
 ) {
@@ -38,6 +39,31 @@ fun RegisterUI(
     }
     var password by remember {
         mutableStateOf("")
+    }
+
+    val registerStatus by authViewModel.userRegisterStatus.collectAsState()
+
+    var showFailedDialog by remember {
+        mutableStateOf(false)
+    }
+
+    LaunchedEffect(key1 = registerStatus) {
+        when (registerStatus) {
+            is UserRegisterStatus.Failure -> {
+                val errorMessage = (registerStatus as UserRegisterStatus.Failure).exception?.message ?: "Unable to login"
+                localContext.showToast(errorMessage)
+                showFailedDialog = true
+            }
+            UserRegisterStatus.Successful -> {
+                localContext.showToast("Register successful")
+                onSuccessfulRegister()
+            }
+            null -> {
+            }
+            else -> {
+
+            }
+        }
     }
 
     Column(
@@ -102,7 +128,6 @@ fun RegisterUI(
                     }
                     else -> {
                         authViewModel.performRegister(email, password, navigationController)
-                        navigationController.navigate(NavDrawerItem.VillagersScreen.route)
 
                     }
                 }
@@ -112,7 +137,9 @@ fun RegisterUI(
                 navigationController.navigate(NavDrawerItem.LoginScreen.route)
             }
         )
-
+        if (showFailedDialog) {
+            //toast or text on ui
+        }
     }
 }
 

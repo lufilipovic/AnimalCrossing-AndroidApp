@@ -6,8 +6,11 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -15,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.ui.customComposables.BottomBar
+
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -57,13 +61,32 @@ fun Favorites(navigationController: NavHostController, sharedPreferences: Shared
                                 .fillMaxSize(),
                             verticalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Text(
-                                likedItem,
-                                fontSize = 16.sp,
+
+                            Row(
                                 modifier = Modifier
-                                    .padding(10.dp)
-                                    .clip(RoundedCornerShape(8.dp))
-                            )
+                                    .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    likedItem,
+                                    fontSize = 16.sp,
+                                    modifier = Modifier
+                                        .padding(10.dp)
+                                        .clip(RoundedCornerShape(8.dp))
+                                )
+                                IconButton(onClick = {
+                                    // Remove the item from the list
+                                    likedItems = likedItems.filter { it != likedItem }
+
+                                    // Update the shared preferences
+                                    sharedPreferences.edit()
+                                        .putStringSet("liked_items", likedItems.toSet())
+                                        .apply()
+                                }) {
+                                    Icon(Icons.Default.Delete, contentDescription = "Delete")
+                                }
+                            }
                         }
                     }
                 }

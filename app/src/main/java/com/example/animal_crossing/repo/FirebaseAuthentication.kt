@@ -35,12 +35,18 @@ object FirebaseAuthentication {
         onSuccess: () -> Unit,
         onFailure: (Exception?) -> Unit
     ) {
+
+        val userAuthStatus = MutableStateFlow<Boolean?>(null)
+
         firebaseAuth.createUserWithEmailAndPassword(username, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     onSuccess()
+                    userAuthStatus.value = true
                 } else {
                     onFailure(it.exception)
+                    userAuthStatus.value = false
+
                 }
             }
     }

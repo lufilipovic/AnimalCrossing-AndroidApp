@@ -53,7 +53,8 @@ fun LoginUI(
     LaunchedEffect(key1 = loginStatus) {
         when (loginStatus) {
             is UserLoginStatus.Failure -> {
-                localContext.showToast("Unable to login")
+                val errorMessage = (loginStatus as UserLoginStatus.Failure).exception?.message ?: "Unable to login"
+                localContext.showToast(errorMessage)
                 showFailedDialog = true
             }
             UserLoginStatus.Successful -> {
@@ -62,6 +63,7 @@ fun LoginUI(
             }
             null -> {
             }
+            else -> {}
         }
     }
 

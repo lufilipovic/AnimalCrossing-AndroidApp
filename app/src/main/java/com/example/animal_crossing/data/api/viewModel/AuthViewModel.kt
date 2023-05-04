@@ -15,6 +15,7 @@ class AuthViewModel() : ViewModel() {
 
     private val _userRegisterStatus = MutableStateFlow<UserLoginStatus?>(null)
     val userRegisterStatus = _userRegisterStatus.asStateFlow()
+
     fun performLogin(email: String, password: String, navigationController: NavHostController) {
         FirebaseAuthentication.login(
             firebaseAuth,
@@ -40,18 +41,23 @@ class AuthViewModel() : ViewModel() {
             email,
             password,
             onSuccess = {
-                _userLoginStatus.value = UserLoginStatus.Successful
-                navigationController.navigate(NavDrawerItem.VillagersScreen.route)
+                _userRegisterStatus.value = UserRegisterStatus.Successful
+                navigationController.navigate(NavDrawerItem.BugsScreen.route)
 
             },
             onFailure = {
-
+                _userRegisterStatus.value = UserRegisterStatus.Failure(it)
             }
         )
     }
 }
 
 sealed class UserLoginStatus {
+    object Successful : UserLoginStatus()
+    class Failure(val exception: Exception?) : UserLoginStatus()
+}
+
+sealed class UserRegisterStatus {
     object Successful : UserLoginStatus()
     class Failure(val exception: Exception?) : UserLoginStatus()
 }

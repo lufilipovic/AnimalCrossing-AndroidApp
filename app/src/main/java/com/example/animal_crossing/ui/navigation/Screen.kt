@@ -63,7 +63,7 @@ fun Navigation(navController: NavHostController, context: Context) {
         }
 
         composable(NavDrawerItem.RegisterScreen.route) {
-            RegisterUI(onSuccessfulLogin = { /*TODO*/ }, navigationController = navController)
+            RegisterUI(onSuccessfulRegister = { /*TODO*/ }, navigationController = navController)
         }
 
         composable(NavDrawerItem.FavoritesScreen.route) {
