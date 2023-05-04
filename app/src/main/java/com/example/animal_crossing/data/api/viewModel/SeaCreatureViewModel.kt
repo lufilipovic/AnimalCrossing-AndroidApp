@@ -7,11 +7,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.animal_crossing.data.api.APIService
-import com.example.animal_crossing.data.api.model.FossilItem
 import com.example.animal_crossing.data.api.model.SeaCreatureItem
 import kotlinx.coroutines.launch
 
-class SeaCreatureViewModel: ViewModel() {
+class SeaCreatureViewModel : ViewModel() {
     lateinit var selectedSeaCreature: SeaCreatureItem
     val onSeaCreatureSelected: (seaCreature: SeaCreatureItem) -> Unit = {
         selectedSeaCreature = it

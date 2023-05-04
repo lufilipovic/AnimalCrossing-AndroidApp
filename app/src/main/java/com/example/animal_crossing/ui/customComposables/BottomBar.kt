@@ -11,19 +11,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.animal_crossing.R
 import com.example.animal_crossing.ui.navigation.NavDrawerItem
 import com.example.animal_crossing.ui.navigation.Navigation
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreen(context: Context) {
-    val scaffoldState = rememberScaffoldState(rememberDrawerState(initialValue = DrawerValue.Closed))
+fun MainScreen(
+    context: Context,
+) {
+    val scaffoldState =
+        rememberScaffoldState(rememberDrawerState(initialValue = DrawerValue.Closed))
     val navController = rememberNavController()
 
     Scaffold(
         scaffoldState = scaffoldState,
-        bottomBar = { BottomBar(navController = navController) }
     ) {
         Navigation(navController = navController, context = context)
     }
@@ -38,8 +39,9 @@ fun BottomBar(modifier: Modifier = Modifier, navController: NavController) {
         NavDrawerItem.FossilsScreen,
         NavDrawerItem.SeaCreaturesScreen,
         NavDrawerItem.VillagersScreen,
-        NavDrawerItem.GameDetailScreen,
-        NavDrawerItem.FavoritesScreen
+        NavDrawerItem.FavoritesScreen,
+        NavDrawerItem.GameDetailScreen
+
     )
 
     BottomNavigation(
@@ -66,5 +68,4 @@ fun BottomBar(modifier: Modifier = Modifier, navController: NavController) {
             )
         }
     }
-} // BottomBar
-
+}

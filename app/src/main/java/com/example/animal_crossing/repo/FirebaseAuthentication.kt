@@ -1,7 +1,6 @@
 package com.example.animal_crossing.repo
 
 import com.google.firebase.auth.FirebaseAuth
-import com.skydoves.landscapist.glide.GlideImageState
 import kotlinx.coroutines.flow.MutableStateFlow
 
 object FirebaseAuthentication {
@@ -12,16 +11,16 @@ object FirebaseAuthentication {
         password: String,
         onSuccess: () -> Unit,
         onFailure: (Exception?) -> Unit
-    ){
+    ) {
 
         val userAuthStatus = MutableStateFlow<Boolean?>(null)
 
         firebaseAuth.signInWithEmailAndPassword(username, password)
             .addOnCompleteListener {
-                if (it.isSuccessful){
+                if (it.isSuccessful) {
                     onSuccess()
                     userAuthStatus.value = true
-                }else{
+                } else {
                     onFailure(it.exception)
                     userAuthStatus.value = false
                 }
@@ -35,18 +34,18 @@ object FirebaseAuthentication {
         password: String,
         onSuccess: () -> Unit,
         onFailure: (Exception?) -> Unit
-    ){
+    ) {
         firebaseAuth.createUserWithEmailAndPassword(username, password)
             .addOnCompleteListener {
-                if (it.isSuccessful){
+                if (it.isSuccessful) {
                     onSuccess()
-                }else{
+                } else {
                     onFailure(it.exception)
                 }
             }
     }
 
-    fun logout(firebaseAuth: FirebaseAuth){
-       firebaseAuth.signOut()
+    fun logout(firebaseAuth: FirebaseAuth) {
+        firebaseAuth.signOut()
     }
 }

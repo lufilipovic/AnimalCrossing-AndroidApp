@@ -33,7 +33,7 @@ interface APIService {
     companion object {
         var apiService: APIService? = null
         fun getInstance(): APIService {
-            if(apiService == null) {
+            if (apiService == null) {
                 apiService = Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())

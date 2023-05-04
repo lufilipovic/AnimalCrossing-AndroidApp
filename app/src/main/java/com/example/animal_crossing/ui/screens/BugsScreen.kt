@@ -11,13 +11,13 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.BugViewModel
+import com.example.animal_crossing.ui.customComposables.BottomBar
 import com.example.animal_crossing.ui.customComposables.CustomImageCard
 import com.example.animal_crossing.ui.navigation.NavDrawerItem
 
@@ -36,6 +36,8 @@ fun BugsScreen(navigationController: NavHostController, vm: BugViewModel) {
                 title = { Row { Text(text = "All ACNH Bugs") } },
             )
         },
+        bottomBar = { BottomBar(navController = navigationController) },
+
 
         content = {
             Column {
@@ -54,7 +56,7 @@ fun BugsScreen(navigationController: NavHostController, vm: BugViewModel) {
                     },
                     shape = RoundedCornerShape(16.dp),
                     colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = Color.White,
+                        backgroundColor = MaterialTheme.colors.background,
                         cursorColor = MaterialTheme.colors.primary,
                         focusedIndicatorColor = MaterialTheme.colors.primary,
                         unfocusedIndicatorColor = Color.Gray,

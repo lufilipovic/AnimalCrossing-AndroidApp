@@ -1,19 +1,16 @@
 package com.example.animal_crossing.ui.screens
 
 import android.content.Context
-import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -26,10 +23,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.AuthViewModel
 import com.example.animal_crossing.ui.navigation.NavDrawerItem
-import com.google.firebase.auth.FirebaseAuth
 
 @Composable
-fun RegisterUI(onSuccessfulLogin: () -> Unit, authViewModel: AuthViewModel = viewModel(), navigationController: NavHostController) {
+fun RegisterUI(
+    onSuccessfulLogin: () -> Unit,
+    authViewModel: AuthViewModel = viewModel(),
+    navigationController: NavHostController
+) {
 
     val localContext = LocalContext.current
 
@@ -136,7 +136,7 @@ fun RegisterFooter(
 
 }
 
-private fun Context.showToast(message: String){
+private fun Context.showToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 

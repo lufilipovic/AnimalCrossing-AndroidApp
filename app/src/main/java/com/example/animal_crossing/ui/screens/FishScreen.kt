@@ -14,10 +14,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.FishViewModel
+import com.example.animal_crossing.ui.customComposables.BottomBar
 import com.example.animal_crossing.ui.customComposables.CustomImageCard
 import com.example.animal_crossing.ui.navigation.NavDrawerItem
 
@@ -36,6 +36,8 @@ fun FishScreen(navigationController: NavHostController, vm: FishViewModel) {
                 title = { Row { Text(text = "All ACNH Fish") } }
             )
         },
+        bottomBar = { BottomBar(navController = navigationController) },
+
         content = {
             Column {
                 Spacer(modifier = Modifier.height(8.dp))
@@ -53,7 +55,7 @@ fun FishScreen(navigationController: NavHostController, vm: FishViewModel) {
                     },
                     shape = RoundedCornerShape(16.dp),
                     colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = Color.White,
+                        backgroundColor = MaterialTheme.colors.background,
                         cursorColor = MaterialTheme.colors.primary,
                         focusedIndicatorColor = MaterialTheme.colors.primary,
                         unfocusedIndicatorColor = Color.Gray,
@@ -78,7 +80,7 @@ fun FishScreen(navigationController: NavHostController, vm: FishViewModel) {
 
                             items(items = vm.fishList.filter { fish ->
                                 fish.name.contains(searchQuery, ignoreCase = true)
-                            }){ fish ->
+                            }) { fish ->
                                 Box(modifier = Modifier
                                     .fillMaxWidth(0.5f)
                                     .padding(8.dp)

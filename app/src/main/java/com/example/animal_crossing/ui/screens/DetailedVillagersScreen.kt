@@ -8,18 +8,15 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.content.edit
-import com.example.animal_crossing.data.api.viewModel.FossilViewModel
 import com.example.animal_crossing.data.api.viewModel.VillagerViewModel
 import com.example.animal_crossing.ui.customComposables.ProfileHeader
 import com.example.animal_crossing.ui.customComposables.ProfileProperty
@@ -37,8 +34,12 @@ fun DetailedVillagersScreen(vm: VillagerViewModel, sharedPreferences: SharedPref
                         .fillMaxSize()
                         .verticalScroll(scrollState)
                 ) {
-                    ProfileHeader(image = villager.imageUrl, containerHeight = this@BoxWithConstraints.maxHeight)
-                    ProfileContent(vm = vm, containerHeight = this@BoxWithConstraints.maxHeight, sharedPreferences)
+                    ProfileHeader(image = villager.imageUrl)
+                    ProfileContent(
+                        vm = vm,
+                        containerHeight = this@BoxWithConstraints.maxHeight,
+                        sharedPreferences
+                    )
                 }
             }
         }
@@ -54,7 +55,6 @@ private fun ProfileContent(
     var likedItems by rememberSaveable { mutableStateOf(emptyList<String>()) }
     val villagers = vm.selectedVillager
 
-    // Load liked items from SharedPreferences when the composable is recomposed
     LaunchedEffect(sharedPreferences) {
         val likedItemsSet = sharedPreferences.getStringSet("liked_items", emptySet())
         if (likedItemsSet != null) {
@@ -62,17 +62,13 @@ private fun ProfileContent(
         }
     }
 
-    // Save liked items to SharedPreferences whenever the list changes
     LaunchedEffect(likedItems, sharedPreferences) {
         sharedPreferences.edit {
             putStringSet("liked_items", likedItems.toSet())
         }
     }
 
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+    Column {
         Row {
             Title(villagers.name)
             IconButton(
@@ -97,13 +93,15 @@ private fun ProfileContent(
         ProfileProperty(label = "Species", value = villagers.species)
         ProfileProperty(label = "Personality", value = villagers.personality)
         ProfileProperty(label = "Gender", value = villagers.gender)
-        ProfileProperty(label = "Birthday Month And Day", value = villagers.birthdayMonth + " "+ villagers.birthdayDay)
+        ProfileProperty(
+            label = "Birthday Month And Day",
+            value = villagers.birthdayMonth + " " + villagers.birthdayDay
+        )
         ProfileProperty(label = "Sign", value = villagers.sign)
         ProfileProperty(label = "Quote", value = villagers.quote)
         ProfileProperty(label = "Phrase", value = villagers.phrase)
         ProfileProperty(label = "Islander", value = villagers.islander.toString())
         ProfileProperty(label = "Debut", value = villagers.debut)
-
 
         Spacer(modifier = Modifier.height((containerHeight - 320.dp).coerceAtLeast(0.dp)))
     }

@@ -8,7 +8,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
@@ -18,8 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.content.edit
-import com.example.animal_crossing.data.api.viewModel.BugViewModel
-import com.example.animal_crossing.data.api.viewModel.FossilViewModel
 import com.example.animal_crossing.data.api.viewModel.SeaCreatureViewModel
 import com.example.animal_crossing.ui.customComposables.ProfileHeader
 import com.example.animal_crossing.ui.customComposables.ProfileProperty
@@ -38,8 +35,12 @@ fun DetailedSeaCreaturesScreen(vm: SeaCreatureViewModel, sharedPreferences: Shar
                         .fillMaxSize()
                         .verticalScroll(scrollState)
                 ) {
-                    ProfileHeader(image = seaCreature.imageUrl, containerHeight = this@BoxWithConstraints.maxHeight)
-                    ProfileContent(vm = vm, containerHeight = this@BoxWithConstraints.maxHeight, sharedPreferences = sharedPreferences)
+                    ProfileHeader(image = seaCreature.imageUrl)
+                    ProfileContent(
+                        vm = vm,
+                        containerHeight = this@BoxWithConstraints.maxHeight,
+                        sharedPreferences = sharedPreferences
+                    )
                 }
             }
         }

@@ -2,20 +2,17 @@ package com.example.animal_crossing.ui.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.data.api.viewModel.AuthViewModel
-import com.example.animal_crossing.ui.navigation.NavDrawerItem
+import com.example.animal_crossing.ui.customComposables.BottomBar
 import com.example.animal_crossing.ui.customComposables.CustomImageCard
+import com.example.animal_crossing.ui.navigation.NavDrawerItem
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -36,6 +33,8 @@ fun GameDetailView(
                 }
             )
         },
+        bottomBar = { BottomBar(navController = navigationController) },
+
         content = {
             Column(
                 modifier = Modifier

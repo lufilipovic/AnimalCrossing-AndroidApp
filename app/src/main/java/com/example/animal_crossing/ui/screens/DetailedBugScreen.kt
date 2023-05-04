@@ -21,8 +21,6 @@ import com.example.animal_crossing.data.api.viewModel.BugViewModel
 import com.example.animal_crossing.ui.customComposables.ProfileHeader
 import com.example.animal_crossing.ui.customComposables.ProfileProperty
 import com.example.animal_crossing.ui.customComposables.Title
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 @Composable
 fun DetailedBugScreen(vm: BugViewModel, sharedPreferences: SharedPreferences) {
@@ -38,8 +36,12 @@ fun DetailedBugScreen(vm: BugViewModel, sharedPreferences: SharedPreferences) {
                         .fillMaxSize()
                         .verticalScroll(scrollState)
                 ) {
-                    ProfileHeader(image = bug.imageUrl, containerHeight = this@BoxWithConstraints.maxHeight)
-                    ProfileContent(vm = vm, containerHeight = this@BoxWithConstraints.maxHeight, sharedPreferences = sharedPreferences)
+                    ProfileHeader(image = bug.imageUrl)
+                    ProfileContent(
+                        vm = vm,
+                        containerHeight = this@BoxWithConstraints.maxHeight,
+                        sharedPreferences = sharedPreferences
+                    )
                 }
             }
         }

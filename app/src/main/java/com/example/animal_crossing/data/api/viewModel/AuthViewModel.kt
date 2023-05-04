@@ -22,7 +22,7 @@ class AuthViewModel() : ViewModel() {
             password,
             onSuccess = {
                 _userLoginStatus.value = UserLoginStatus.Successful
-                navigationController.navigate(NavDrawerItem.VillagersScreen.route)
+                navigationController.navigate(NavDrawerItem.BugsScreen.route)
             },
             onFailure = {
                 _userLoginStatus.value = UserLoginStatus.Failure(it)
@@ -30,7 +30,7 @@ class AuthViewModel() : ViewModel() {
         )
     }
 
-    fun performLogout(){
+    fun performLogout() {
         FirebaseAuthentication.logout(firebaseAuth)
     }
 

@@ -35,8 +35,12 @@ fun DetailedFishScreen(vm: FishViewModel, sharedPreferences: SharedPreferences) 
                         .fillMaxSize()
                         .verticalScroll(scrollState)
                 ) {
-                    ProfileHeader(image = fish.imageUrl, containerHeight = this@BoxWithConstraints.maxHeight)
-                    ProfileContent(vm = vm, containerHeight = this@BoxWithConstraints.maxHeight, sharedPreferences = sharedPreferences)
+                    ProfileHeader(image = fish.imageUrl)
+                    ProfileContent(
+                        vm = vm,
+                        containerHeight = this@BoxWithConstraints.maxHeight,
+                        sharedPreferences = sharedPreferences
+                    )
                 }
             }
         }

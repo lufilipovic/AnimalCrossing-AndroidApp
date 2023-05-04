@@ -15,7 +15,7 @@ sealed class ThemeColors(
 ){
     object Night: ThemeColors(
         background = Color(0XFF000000),
-        surface = Color(0XFF000000),
+        surface = Color(219,191,158),
         primary = Color(219,191,158),
         text = Color(0XFFFFFFFFF)
     )

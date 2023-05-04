@@ -42,7 +42,6 @@ fun CustomImageCard(
                 },
                 failure = {
                     Text("Image request failed")
-                    //println(photograph.url)
                 }
             )
             Box(
