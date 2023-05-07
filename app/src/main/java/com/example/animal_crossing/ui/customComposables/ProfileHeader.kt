@@ -21,7 +21,7 @@ fun ProfileHeader(
     ) {
         GlideImage(
             modifier = Modifier
-                .size(250.dp),
+                .size(320.dp),
             imageModel = { image },
             imageOptions = ImageOptions(contentScale = ContentScale.FillBounds)
         )
