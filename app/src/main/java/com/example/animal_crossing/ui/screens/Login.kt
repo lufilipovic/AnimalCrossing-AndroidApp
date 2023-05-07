@@ -77,12 +77,22 @@ fun LoginUI(
         ) {
 
             Text(
+                text = "Animal Crossing: New Horizons",
+                fontFamily = FontFamily.Cursive,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Medium,
+                fontSize = 30.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 20.dp)
+            )
+
+            Text(
                 text = "Log In",
                 fontFamily = FontFamily.Cursive,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Medium,
-                //color = Color.,
-                fontSize = 40.sp,
+                fontSize = 30.sp,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 20.dp)
