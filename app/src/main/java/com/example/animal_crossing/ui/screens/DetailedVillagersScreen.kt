@@ -2,6 +2,7 @@ package com.example.animal_crossing.ui.screens
 
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -20,6 +21,7 @@ import androidx.core.content.edit
 import com.example.animal_crossing.data.api.viewModel.VillagerViewModel
 import com.example.animal_crossing.ui.customComposables.ProfileHeader
 import com.example.animal_crossing.ui.customComposables.ProfileProperty
+import com.example.animal_crossing.ui.customComposables.PulsatingHeart
 import com.example.animal_crossing.ui.customComposables.Title
 
 @Composable
@@ -68,6 +70,10 @@ private fun ProfileContent(
         }
     }
 
+    val infiniteTransition = rememberInfiniteTransition()
+    val pulsate = PulsatingHeart(infiniteTransition)
+
+
     Column {
         Row {
             Title(villagers.name)
@@ -84,7 +90,13 @@ private fun ProfileContent(
             ) {
                 Icon(
                     imageVector = if (likedItems.contains(villagers.name)) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
-                    contentDescription = if (likedItems.contains(villagers.name)) "Liked" else "Not liked"
+                    contentDescription = if (likedItems.contains(villagers.name)) "Liked" else "Not liked",
+                    modifier = Modifier
+                        .size(pulsate)
+                        .offset(
+                            x = 10.dp,
+                            y = 10.dp
+                        )
                 )
             }
 

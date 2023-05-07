@@ -2,12 +2,14 @@ package com.example.animal_crossing.ui.screens
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -18,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.animal_crossing.ui.customComposables.BottomBar
+import com.example.animal_crossing.ui.customComposables.PulsatingHeart
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -32,11 +35,17 @@ fun Favorites(navigationController: NavHostController, sharedPreferences: Shared
         }
     }
 
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Row { Text(text = "Favorites Page") } },
+                title = {
+                    Row {
+                        Text(text = "Favorites Page")
+                    }
+                },
             )
+
         },
         bottomBar = { BottomBar(navController = navigationController) },
 
@@ -94,3 +103,4 @@ fun Favorites(navigationController: NavHostController, sharedPreferences: Shared
         }
     )
 }
+
